@@ -24,7 +24,7 @@ script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; th
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
 deploy:
-  provider: script
-  script: now public --token $NOW_TOKEN
+#  provider: script
+  script: cd $PACKAGE_LOCATION && now public --token $NOW_TOKEN
   skip_cleanup: true
   app: $PACKAGE_NAME
