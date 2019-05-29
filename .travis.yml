@@ -3,27 +3,22 @@ node_js:
   - "10.15.3"
 
 #cache: yarn
-
-install:
-  - yarn global add now
-  - yarn install
+branches:
+    only:
+        - master
 
 matrix:
   include:
-      - env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
-      - env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
+    - name: "Blog Pipeline"
+      env: PACKAGE_LOCATION=packages/blog
+    - name: "Shop Pipeline"
+      env: PACKAGE_LOCATION=packages/shop
 
 # script:
 #   - cd $PACKAGE_LOCATION
 #   - yarn test
 #   - yarn build
 
-script: if $HOME/.travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
-
-deploy:
-  provider: script
-  script: now public --token $NOW_TOKEN
-  skip_cleanup: true
-  app: $PACKAGE_NAME
