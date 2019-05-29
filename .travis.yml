@@ -20,7 +20,7 @@ matrix:
 #   - yarn test
 #   - yarn build
 
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
+script: if /home/travis/.travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
