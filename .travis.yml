@@ -12,7 +12,7 @@ matrix:
     - name: "Blog Pipeline"
       env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
     - name: "Shop Pipeline"
-      env: PACKAGE_LOCATION=packages/shop lerna-monorepo-shop
+      env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
 
 script:
   - cd $PACKAGE_LOCATION
