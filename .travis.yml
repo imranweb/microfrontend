@@ -19,12 +19,16 @@ matrix:
 #   - yarn test
 #   - yarn build
 
+
 script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yarn install && yarn test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
+after_script:
+  - cd $PACKAGE_LOCATION
+  
 deploy:
   provider: script
-  script:   now $PACKAGE_LOCATION/public --token $NOW_TOKEN
+  script:   now public --token $NOW_TOKEN
   skip_cleanup: true
   app: $PACKAGE_NAME
