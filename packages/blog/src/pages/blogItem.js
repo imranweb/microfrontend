@@ -16,7 +16,7 @@ export default ({ pathContext: { data }}) => {
       <h1>{data.title}</h1>
       <p>{data.content}</p>
       <StyledAnchor href={data.href}>Full article</StyledAnchor>
-      <Link to="/">Back to Blog</Link>
+      <a href={process.env.BLOG_URL}>Go to Shop</a>
     </div>
   )
 }
