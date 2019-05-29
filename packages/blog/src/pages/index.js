@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { ItemCard, ItemCardWrapper } from '../../packages/shared-ui/components/ItemCard';
+import { ItemCard, ItemCardWrapper } from '@lerna-monorepo/shared-ui/components/ItemCard';
 
 const BlogPage = ({ data }) => {
   const edges = data.allBlogJson.edges
