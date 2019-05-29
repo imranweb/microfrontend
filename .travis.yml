@@ -7,8 +7,6 @@ cache: yarn
 notifications:
     email: false
   
-install:
-  - yarn global add now
 
 matrix:
   include:
@@ -27,6 +25,8 @@ script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; th
 
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
+after_script:
+  - yarn global add now
 
 deploy:
   provider: script
