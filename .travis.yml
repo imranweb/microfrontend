@@ -10,17 +10,15 @@ install:
 
 matrix:
   include:
-    - name: "Blog Pipeline"
-      env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
-    - name: "Shop Pipeline"
-      env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
+      - env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
+      - env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
 
 # script:
 #   - cd $PACKAGE_LOCATION
 #   - yarn test
 #   - yarn build
 
-script: if /home/travis/.travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
 #script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
 
