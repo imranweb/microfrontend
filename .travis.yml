@@ -5,9 +5,15 @@ node_js:
 cache: yarn
 
 install:
-  - yarn global add lerna jest
-  - lerna bootstrap
+  - yarn install
 
-script:
+matrix:
+  include:
+    - name: "Blog Pipeline"
+      env: PACKAGE_LOCATION=packages/blog
+    - name: "Shop Pipeline"
+      env: PACKAGE_LOCATION=packages/shop
+script: 
+  - cd $PACKAGE_LOCATION
   - yarn test
   - yarn build

@@ -24,8 +24,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "clean": "lerna clean --yes && rm -r ./node_modules",
     "test": "lerna run --parallel --ignore shared-ui test",
     "run:blog": "cd packages/blog && yarn develop",
     "run:shop": "cd packages/shop && yarn develop",
