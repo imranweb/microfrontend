@@ -5,6 +5,7 @@ node_js:
 cache: yarn
 
 install:
+  - yarn global add now
   - yarn install
 
 matrix:
