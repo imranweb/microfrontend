@@ -2,23 +2,15 @@ language: node_js
 node_js:
   - "10.15.3"
 
-#cache: yarn
+notifications:
+    email: false
+
 branches:
     only:
         - master
-
 matrix:
-  include:
-    - name: "Blog Pipeline"
-      env: PACKAGE_LOCATION=packages/blog
-    - name: "Shop Pipeline"
-      env: PACKAGE_LOCATION=packages/shop
+    include:
+        - env: TARGET=packages/blog
+        - env: TARGET=packages/shop
 
-# script:
-#   - cd $PACKAGE_LOCATION
-#   - yarn test
-#   - yarn build
-
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then echo "$PACKAGE_LOCATION is being built" && cd $PACKAGE_LOCATION && yan test && yarn build; else echo "$PACKAGE_LOCATION is NOT being built"; fi
-
-#script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "$TARGET is being built" && cd $TARGET && yarn install && yarn build; else echo "$TARGET is NOT being built"; fi
