@@ -13,7 +13,6 @@ matrix:
       env: PACKAGE_LOCATION=packages/blog
     - name: "Shop Pipeline"
       env: PACKAGE_LOCATION=packages/shop
-script: 
-  - cd $PACKAGE_LOCATION
-  - yarn test
-  - yarn build
+
+
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PACKAGE_LOCATION; then yarn test && yarn build else echo "$PACKAGE_LOCATION is NOT being built"; fi
